@@ -1,0 +1,898 @@
+/*
+  @import：在当前的LESS文件中导入其他的LESS文件中的代码，这样在本样式中就可以拥有其它文件中的样式了
+
+    @import "xxx.less"; //->.less后缀名可以省略  这样导入的话,以后在编译的时候,会把其它LESS文件中的代码也进行编译,最后都合并在当前编译后的CSS文件中了
+
+    @import (reference) "xxx"; //->也是把其它的LESS导入进来,供我们当前LESS使用，但是增加了 reference 代表“只是引用，不进行编译”，我们一般在这样的LESS中写入的都不是具体的业务样式，而是公共的变量和方法，这些变量方法仅仅是供我们调取使用的，不需要编译即可
+*/
+@import "reset";
+@import "swiper";
+@import "animate";
+@import (reference) "public";
+
+html {
+  font-size: 100px; /*1REM=100PX 640PX*/
+}
+
+html, body {
+  .fullPage;
+  position: relative;
+  z-index: -4;
+  background: #F4F4F4;
+}
+
+.mainBox {
+  /*当设备的宽度大于设计稿的时候,我们让展示内容的部分最大宽度和设计稿一致,整体在页面水平居中的位置,两边留白即可 =>淘宝、京东都是这样处理的*/
+  .fullPage;
+  position: relative;
+  z-index: -3;
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+/*--LOADING--*/
+.loading {
+  .fullPage;
+  .transitionFn(@duration: .5s);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  opacity: 1;
+
+  .header {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -2.2rem; /*-.7 - 1.5*/
+    width: 100%;
+    height: 1.4rem;
+
+    h1, h2 {
+      color: @c-white;
+      text-align: center;
+      letter-spacing: .04rem;
+
+    }
+
+    h1 {
+      font-size: .5rem;
+      line-height: .75rem;
+    }
+
+    h2 {
+      margin-top: .2rem;
+      font-size: .26rem;
+      line-height: .45rem;
+    }
+  }
+
+  .progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: .85rem 0 0 -2.3rem; /*-.15+1=.85*/
+    width: 4.6rem;
+    height: .3rem;
+    background: @c-white;
+    border-radius: .06rem;
+
+    span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: .06rem;
+
+      /*在移动端使用CSS3属性,需要些两套,一套加前缀,一套不加,而且必须是加前缀的在前,不加的在后 =>规定*/
+      background: -webkit-linear-gradient(45deg, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
+      background: linear-gradient(45deg, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
+      background-size: .3rem .3rem; /*每一个小正方格是一组,整个进度条是由很多组组成的*/
+
+      /*设置CSS3的帧动画,让进度条的斑马线一直在运动*/
+      -webkit-animation: loadingMove 1s linear infinite both;
+      animation: loadingMove 1s linear infinite both;
+
+      /*设置TRANSITION动画,当进度条的宽度发生改变的时候,让其有一个过渡的动画效果,这样好看一些*/
+      .transitionFn;
+    }
+  }
+}
+
+@-webkit-keyframes loadingMove {
+  0% {
+    background-position: 0 .3rem;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes loadingMove {
+  0% {
+    background-position: 0 .3rem;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/*--PHONE--*/
+.phone {
+  .fullPage;
+  .transitionFn(@duration: .3s);
+  display: none;
+  position: relative;
+  z-index: -2;
+  background: url("../img/zf_phoneBg.jpg") no-repeat;
+  background-size: cover;
+
+  .header {
+    position: absolute;
+    top: .5rem;
+    left: 50%;
+    margin-left: -1.31rem;
+    width: 2.62rem;
+    height: 1.25rem;
+    background: url("../img/zf_phoneLogo.png") no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .time {
+    display: none;
+    position: absolute;
+    top: 1.85rem;
+    left: 0;
+    width: 100%;
+    line-height: .3rem;
+    text-align: center;
+
+    color: @c-white;
+    font-size: .3rem;
+    letter-spacing: .05rem;
+  }
+
+  .listen {
+    position: absolute;
+    bottom: .3rem;
+    left: 50%;
+    margin-left: -2.6rem;
+    width: 5.2rem;
+    height: 3.6rem;
+    background: url("../img/zf_phoneListen.png") no-repeat;
+    background-size: 100% 100%;
+
+    span {
+      position: absolute;
+      right: -.07rem;
+      bottom: .47rem;
+      width: 1.6rem;
+      height: 1.6rem;
+
+      &.move { /*&在LESS中是连字符,相当于让后面紧跟着一个MOVE样式 span.move*/
+        z-index: -1;
+        border: 0.03rem solid #0F0;
+        border-radius: 50%;
+        .animationFn(@name: phoneListenMove,@timing-function: linear,@iteration-count: infinite);
+      }
+    }
+  }
+
+  .detail {
+    position: absolute;
+    bottom: .3rem;
+    left: 50%;
+    margin-left: -2.6rem;
+    width: 5.2rem;
+    height: 6.59rem;
+    background: url("../img/zf_phoneDetail.png") no-repeat;
+    background-size: 100% 100%;
+
+    -webkit-transform: translateY(6.89rem);
+    transform: translateY(6.89rem);
+
+    .transitionFn(@duration: .5s);
+
+    span {
+      position: absolute;
+      bottom: .28rem;
+      left: 50%;
+      margin-left: -.8rem;
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+}
+
+@-webkit-keyframes phoneListenMove {
+  from {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+  to {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+}
+
+@keyframes phoneListenMove {
+  from {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+  to {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+}
+
+/*--MESSAGE--*/
+.message {
+  .fullPage;
+  display: none;
+  position: relative;
+  background: #EAEAEA;
+
+  .list {
+    .transitionFn(@duration: .3s); /*控制列表区域的运动动画*/
+    margin-top: .2rem;
+    padding: 0 1.25rem;
+
+    li {
+      position: relative;
+      margin-bottom: .4rem;
+      padding: .25rem;
+      max-width: 3.6rem;
+      line-height: .4rem;
+      font-size: .26rem;
+      border-radius: .1rem;
+      /*MOVE=>每一条消息出现时候的动画,目标值：translateY(0) opacity:1*/
+      opacity: 0;
+      -webkit-transform: translateY(1rem);
+      transform: translateY(1rem);
+      .transitionFn(@duration: .3s);
+
+      em {
+        position: absolute;
+        top: .2rem;
+        width: .1rem;
+        height: .2rem;
+      }
+
+      img {
+        position: absolute;
+        top: 0;
+        width: .82rem;
+        height: .82rem;
+        border-radius: 50%;
+      }
+
+      &.student {
+        float: left;
+        background: @c-white;
+        border: .02rem solid darken(@c-white, 20%); /*LESS DARKEN/LIGHTEN 把某一个颜色变深或者变浅*/
+
+        em {
+          left: -.1rem;
+          background: url("../img/zf_messageArrow1.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        img {
+          left: -1rem;
+        }
+      }
+
+      &.teacher {
+        float: right;
+        background: @c-green;
+        border: .02rem solid darken(@c-green, 20%);
+        em {
+          right: -.1rem;
+          background: url("../img/zf_messageArrow2.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        img {
+          right: -1rem;
+        }
+      }
+    }
+  }
+
+  .keyBoard {
+    position: absolute;
+    left: 0;
+    bottom: -.54rem;
+    width: 100%;
+    height: 5.16rem;
+    background: url("../img/zf_messageKeyboard.png") no-repeat;
+    background-size: 100% 100%;
+
+    /*MOVE=>translateY(0)*/
+    -webkit-transform: translateY(3.7rem);
+    transform: translateY(3.7rem);
+    .transitionFn(@duration: .3s);
+
+    .text {
+      position: absolute;
+      top: .35rem;
+      left: .9rem;
+      width: 4rem;
+      height: .4rem;
+      line-height: .4rem;
+      font-size: .25rem;
+    }
+
+    .submit {
+      display: none;
+      position: absolute;
+      right: .1rem;
+      bottom: .6rem;
+      width: 1.47rem;
+      height: .74rem;
+      background: url("../img/zf_messageChat.png") no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+}
+
+/*--CUBE--*/
+.cube {
+  .fullPage;
+  display: none;
+  position: relative;
+  background: url("../img/zf_cubeBg.jpg") no-repeat;
+  background-size: cover;
+
+  /*3D->景深*/
+  perspective: 2000px;
+
+  .tip {
+    position: absolute;
+    bottom: .5rem;
+    left: 50%;
+    margin-left: -1.97rem;
+    width: 3.94rem;
+    height: .44rem;
+    background: url("../img/zf_cubeTip.png") no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .cubeBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -2.55rem 0 0 -2.55rem;
+    width: 5.1rem;
+    height: 5.1rem;
+
+    /*3D->3D变形*/
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    /*3D->为了在开始的时候能看到这个盒子,我们给盒子初始旋转一定的角度:先缩小在旋转,否则容易发生盒子扭曲*/
+    -webkit-transform: scale(0.6) rotateX(35deg) rotateY(45deg);
+    transform: scale(0.6) rotateX(35deg) rotateY(45deg);
+
+    /*3D->设置过渡动画,当盒子旋转的时候有动画效果*/
+    .transitionFn(@duration: .3s);
+
+    li {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      /*3D->移动具体的某一面*/
+      &:nth-child(1) {
+        -webkit-transform: translateZ(2.55rem);
+        transform: translateZ(2.55rem);
+      }
+
+      &:nth-child(2) {
+        -webkit-transform: translateZ(-2.55rem) rotateY(180deg);
+        transform: translateZ(-2.55rem) rotateY(180deg);
+      }
+
+      &:nth-child(3) {
+        -webkit-transform: translateX(-2.55rem) rotateY(-90deg);
+        transform: translateX(-2.55rem) rotateY(-90deg);
+      }
+
+      &:nth-child(4) {
+        -webkit-transform: translateX(2.55rem) rotateY(90deg);
+        transform: translateX(2.55rem) rotateY(90deg);
+      }
+
+      &:nth-child(5) {
+        -webkit-transform: translateY(-2.55rem) rotateX(90deg);
+        transform: translateY(-2.55rem) rotateX(90deg);
+      }
+
+      &:nth-child(6) {
+        -webkit-transform: translateY(2.55rem) rotateX(-90deg);
+        transform: translateY(2.55rem) rotateX(-90deg);
+      }
+    }
+  }
+}
+
+/*--SWIPER--*/
+.swiper-container {
+  .fullPage;
+  display: none;
+  position: relative;
+
+  .return {
+    position: absolute;
+    top: .2rem;
+    right: .2rem;
+    z-index: 999;
+    width: .64rem;
+    height: .75rem;
+    background: url("../img/zf_return.png") no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .swiper-slide {
+    .fullPage;
+    position: relative;
+    font-family: Microsoft JhengHei;
+
+    &.page1 {
+      background: transparent;
+      perspective: 2000px;
+      background: url("../img/nuli.jpg" ) no-repeat;
+      background-size:6.4rem 100%;
+
+      dl {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -3.6rem 0 0 -2.7rem;
+        width: 5.4rem;
+        height: 7.2rem;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+
+        dt {
+          line-height: .6rem;
+          text-align: center;
+          font-size: .4rem;
+          color: yellow;
+          background: @c-bgGreen;
+        }
+
+        dd {
+          position: relative;
+          box-sizing: border-box;
+          height: .6rem;
+          line-height: .6rem;
+          background: @c-bgGreen;
+          border-top: .02rem dashed rgba(255, 255, 255, 0.3);
+
+          em {
+            position: absolute;
+            left: .15rem;
+            top: 50%;
+            z-index: 998;
+            margin-top: -.21rem;
+            width: .36rem;
+            height: .42rem;
+            line-height: .42rem;
+            text-align: center;
+            color: @c-white;
+            font-size: .2rem;
+            font-style: normal;
+            background: url("../img/zf_outline.png") no-repeat;
+            background-size: 100% 100%;
+          }
+
+          a {
+            display: block;
+            position: relative;
+            z-index: 998;
+            margin-left: .64rem;
+            color: #000;
+            font-size: .20rem;
+            //text-overflow: ellipsis;
+            //white-space: nowrap;
+            //overflow: hidden;
+          }
+        }
+      }
+    }
+
+    &.page2 {
+
+      background: url("../img/nuli.jpg" ) no-repeat;
+      background-size:6.4rem 100%;
+
+      h2 {
+        position: absolute;
+        top: .8rem;
+        left: 0;
+        width: 100%;
+        line-height: .9rem;
+        text-align: center;
+        color: #665C50;
+        font-size: .6rem;
+        font-weight: normal;
+        opacity: 0;
+      }
+
+      .imgBox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -2.4rem 0 0 -2.56rem;
+        width: 5.12rem;
+        height: 5.8rem;
+
+        img {
+          .transitionFn(@duration: .3s);
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin: -.5rem 0 0 -.5rem;
+          width: 1rem;
+          height: 1rem;
+          opacity: 0;
+
+          &:nth-child(1) {
+            margin: -.85rem 0 0 -.66rem;
+            width: 1.32rem;
+            height: 1.7rem;
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+    &.page3 {
+      background: url("../img/nuli.jpg" ) no-repeat;
+      background-size:6.4rem 100%;
+    }
+
+    &.page4 {
+      background: url("../img/nuli.jpg" ) no-repeat;
+      background-size:6.4rem 100%;
+    }
+
+    &.page5 {
+      background: url("../img/nuli.jpg" ) no-repeat;
+      background-size:6.4rem 100%;
+    }
+
+    &.page6 {
+      background: url("../img/nuli.jpg" ) no-repeat;
+      background-size:6.4rem 100%;
+    }
+  }
+}
+
+/*--PAGE2下的动画--*/
+#page2 {
+  h2 {
+    .animationFn(@name: bounceInLeft);
+  }
+
+  img {
+    &:nth-child(1) {
+      .animationFn(@name: shake);
+    }
+
+    &:not(:nth-child(1)) {
+      opacity: 1;
+      .animationFn(@name: tada,@delay: .3s,@iteration-count: infinite);
+      /*-webkit-animation: a 1s infinite both, b .5s; 多个CSS3动画中间使用逗号隔开*/
+    }
+
+    &:nth-child(2) {
+      margin-top: -2.9rem;
+    }
+
+    &:nth-child(3) {
+      margin-top: -1.7rem;
+      margin-left: 1.5rem;
+    }
+
+    &:nth-child(4) {
+      margin-top: .7rem;
+      margin-left: 1.5rem;
+    }
+
+    &:nth-child(5) {
+      margin-top: 1.9rem;
+    }
+
+    &:nth-child(6) {
+      margin-top: .7rem;
+      margin-left: -2.5rem;
+    }
+
+    &:nth-child(7) {
+      margin-top: -1.7rem;
+      margin-left: -2.5rem;
+    }
+  }
+}
+
+
+
+.swiper-container{
+  .page3{
+
+
+    width:100% ;
+    .boxBou{
+
+      position: absolute;
+      top:2rem;
+      left:0.5rem;
+      width: 5.4rem;
+      border-radius:0.3rem;
+      background-color: transparent;
+
+      //height: 10.2rem;
+      .leftLi{
+        .animationFn(@name: bouncelnDown,@delay: .3s,@iteration-count: infinite);
+
+        width: 100%;
+        li{
+          line-height: .6rem;
+          text-align: left;
+          font-size: .4rem;
+          //color: #F4F4F4;
+
+        }
+      }
+      .rightLi{
+
+        .animationFn(@name: bouncelnDown,@delay: .3s,@iteration-count: infinite);
+
+
+        width: 100%;
+        li{
+
+          line-height: .6rem;
+          text-align: left;
+          font-size: .4rem;
+
+        }
+      }
+
+    }
+
+
+  }
+
+}
+
+
+
+/*轮播*/
+
+#b04 { width: 7rem;}
+
+#b04 .dots { position: absolute; left: 0; right: 0; bottom: 0.2rem;}
+
+#b04 .dots li
+
+{
+
+  display: inline-block;
+
+  width: 0.1rem;
+
+  height: .1rem;
+
+  margin: 0 0.04rem;
+
+  text-indent: -999em;
+
+  border:0.02rem solid #fff;
+
+  border-radius: 0.06rem;
+
+  cursor: pointer;
+
+  opacity: .4;
+
+  -webkit-transition: background .5s, opacity .5s;
+
+  -moz-transition: background .5s, opacity .5s;
+
+  transition: background .5s, opacity .5s;
+
+}
+
+#b04 .dots li.active
+
+{
+
+  background: #fff;
+
+  opacity: 1;
+
+}
+
+#b04 .arrow {
+  position: absolute; top: 2rem;
+}
+
+#b04 #al {
+  top:4rem;
+  left: 0.3rem;
+}
+
+#b04 #ar {
+  top:4rem;
+  right: .3rem;
+}
+html, body {
+  font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+}
+
+ul, ol {
+  padding: 0;
+}
+.experience{
+  position: absolute;
+  top:.3rem;
+  z-index:5;
+}
+
+
+.banner {
+  margin-top: 2rem;
+
+  overflow: auto;
+  text-align: center;
+  border-radius: 1rem;
+
+
+
+
+}
+
+.banner li {
+  list-style: none;
+}
+
+.banner ul li {
+  float: left;
+  width:7rem;
+  height: 5.4rem;
+  border-radius: 1rem;
+
+
+}
+
+//工作经验
+.li-l .text-l{
+  top: 0.2rem;
+  position: absolute;
+  left: 0.8rem;
+  font-size: 0.12rem;
+  width: 5rem;
+
+}
+
+.li-l .text-l h3,.li-r .text-r h3{
+  line-height: 0.18rem;
+  height: 0.18rem;
+  margin-top:0.1rem ;
+}
+
+.li-l .text-l p,.li-r .logo-r .text-r p{
+  text-align: left;
+  //line-height: .12rem;
+  //height: .12rem;
+  margin-top:0.1rem ;
+  font-size: 0.25rem;
+  line-height: 0.3rem;
+
+}
+.li-r{
+  text-align: center;
+}
+
+.li-r .logo-r .text-r{
+  width: 5rem;
+  text-align: center;
+}
+
+
+.li-l .logo-l img , .li-r .logo-r img {
+  width: 1rem;
+  height: 1rem;
+}
+.banner .li-r .logo-r .text-r {
+  font-size: 0.2rem;
+  text-align: left;
+  //position: absolute;
+  //top: 1.2rem;
+
+  line-height: 0.2rem;
+  margin-left:.8rem;
+}
+.banner .li-l .text-l{
+  font-size: 0.2rem;
+  text-align: left;
+  position: absolute;
+  top: 1.2rem;
+  margin-top: 0.1rem;
+  width: 5rem;
+  line-height: 0.2rem;
+}
+.li-l .text-l h3,.li-r .logo-r .text-r h3{
+  font-size: 0.4rem;
+  line-height: 0.4rem;
+  height: 0.4rem;
+  margin-top:0.1rem ;
+}
+.li-l .text-l h4,.li-r .logo-r .text-r h4{
+  line-height: .35rem;
+  font-size: 0.35rem;
+  height:.35rem;
+  margin-top:0.1rem ;
+
+}
+.li-r .logo-r .text-z{
+  text-align: center;
+}
+.page6 .page6-top img{
+  width: 2rem;
+  height: 2rem;
+}
+.page6 .page6-top{
+  width: 2rem;
+  height: 2rem;
+  margin:2rem auto  ;
+}
+.page6 .page6-me{
+  width: 5rem;
+  margin:0 auto;
+}
+.page6 .page6-me h4{
+  line-height: .4rem;
+  height: .4rem;
+  font-size: .4rem;
+  margin-top: .2rem;
+}
+.page5 .job,.page5 .work{
+  margin:0 auto;
+  width: 5rem;
+  height: 4rem;
+}
+.page5 .job h3,.page5 .work h3{
+  line-height: .4rem;
+  height: .5rem;
+  font-size: .4rem;
+  margin-top: .5rem;
+}
+.page5 .job p,.page5 .work p{
+ 
+  font-size: .3rem;
+  margin-top: .15rem;
+}
+.page5 h2{
+  margin-top: 1rem;
+  text-align: center;
+  line-height: .8rem;
+  height: .8rem;
+  font-size: .6rem;
+}
+.page5 .job a,.page5 .work a{
+  line-height: .3rem;
+  height: .4rem;
+  font-size: .3rem;
+  margin-top: .3rem;
+  text-align: center;
+}

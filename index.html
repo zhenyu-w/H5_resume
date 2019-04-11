@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--BASE-->
+    <title>个人简历</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link rel="icon" href="img/icon.png"/>
+
+    <!--META:VP-->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+    <!--IMPORT CSS-->
+    <link rel="stylesheet" href="css/build.min.css"/>
+
+    <!--REM-->
+    <script>
+        ~function () {
+            var winW = document.documentElement.clientWidth,
+                    desW = 640;
+            if (winW < desW) {
+                document.documentElement.style.fontSize = winW / desW * 100 + 'px';
+            }
+        }();
+    </script>
+    <link rel="stylesheet" href="css/swiper.less">
+
+</head>
+<body>
+<main class="mainBox">
+    <!--LOADING-->
+    <section class="loading">
+        <div class="header">
+            <h1>个人简历</h1>
+            <h2>H5场景的交互型简历</h2>
+        </div>
+        <div class="progress">
+            <span></span>
+        </div>
+    </section>
+
+    <!--PHONE-->
+    <section class="phone">
+        <header class="header"></header>
+        <div class="time">00:00</div>
+        <div class="listen">
+            <span class="move"></span>
+            <span class="touch"></span>
+        </div>
+        <div class="detail"><span></span></div>
+    </section>
+
+    <!--MESSAGE-->
+    <section class="message">
+        <ul class="list">
+            <li class="student">
+                您好，感谢您百忙之中查看我的简历。
+                <em></em>
+                <img src="img/zf_messageStudent.png" alt=""/>
+            </li>
+            <li class="student">
+                我的之前工作主要负责页面搭建，模块改换，摸摸搭网站更新
+
+                <em></em>
+                <img src="img/zf_messageStudent.png" alt=""/>
+            </li>
+            <li class="teacher">
+                好的，那你简单介绍一下自己吧！
+                <em></em>
+                    <img src="img/zf_messageLogo.png" alt=""/>
+            </li>
+            <li class="student">
+                您好，我是刘小树，面试前端工程师
+                <em></em>
+                <img src="img/zf_messageStudent.png" alt=""/>
+            </li>
+            <li class="student">
+                我老家秦皇岛的，12年来北京工作，我的性格乐观，努力，认真，耐心,求改变,以学习的心态对待每一件事情
+                <em></em>
+                <img src="img/zf_messageStudent.png" alt=""/>
+            </li>
+
+            <li class="student">
+                目前有过俩份工作经验都是从事前端方面工作
+                <em></em>
+                <img src="img/zf_messageStudent.png" alt=""/>
+            </li>
+
+            <li class="teacher">
+                会使用jQuery,AngularJS，Bootstrap,React等框架吗
+                <em></em>
+                <img src="img/zf_messageLogo.png" alt=""/>
+            </li>
+            <li class="teacher">
+                会使用git管理代码吗？会npm，bower等包管理工具吗
+                <em></em>
+                <img src="img/zf_messageLogo.png" alt=""/>
+            </li>
+            <li class="teacher">
+                能够完成响应式页面开发吗？
+                <em></em>
+                <img src="img/zf_messageLogo.png" alt=""/>
+            </li>
+            <li class="teacher">
+                对常见的浏览器兼容问题有清晰的理解吗？各种浏览器兼容可以调吗？
+                <em></em>
+                <img src="img/zf_messageLogo.png" alt=""/>
+            </li>
+            <li class="teacher">
+                你认为什么是后端啊?你对加班怎么看？叫你影响最深的技术难题是什么...
+                <em></em>
+                <img src="img/zf_messageLogo.png" alt=""/>
+            </li>
+            <li class="student">
+                ...
+                <em></em>
+                <img src="img/zf_messageStudent.png" alt=""/>
+            </li>
+
+        </ul>
+        <div class="keyBoard">
+            <span class="text"><!--感觉自己啥也不会啊?--></span>
+            <div class="submit"></div>
+        </div>
+    </section>
+
+    <!--CUBE-->
+    <section class="cube">
+        <ul class="cubeBox">
+            <li><img src="img/zf_cube1.png" alt="专业技能"/></li>
+            <li><img src="img/zf_cube2.png" alt="IT技能"></li>
+            <li><img src="img/zf_cube3.png" alt="个人资料"></li>
+            <li><img src="img/zf_cube4.png" alt="工作经验"></li>
+            <li><img src="img/zf_cube5.png" alt="项目经验"></li>
+            <li><img src="img/zf_cube6.png" alt="联系方式"></li>
+        </ul>
+        <div class="tip"></div>
+    </section>
+
+    <!--SWIPER-->
+    <section class="swiper-container">
+        <div class="return"></div>
+        <div class="swiper-wrapper">
+            <!--课程大纲-->
+            <div class="swiper-slide page1">
+                <!--dl>dt+dd*11>em{$}+a-->
+                <dl class="course">
+                    <dt>专业技能</dt>
+                    <dd><em>01</em><a href="javascript:;">熟练掌握html和css，理解HTML5常用标签；</a></dd>
+                    <dd><em>02</em><a href="javascript:;">熟练掌握原生js，可以完成页面的各种动态效果;</a></dd>
+                    <dd><em>03</em><a href="javascript:;">对css/Js性能优化、解决多浏览器兼容性问题；</a></dd>
+                    <dd><em>04</em><a href="javascript:;">了解并使用过react，angularJS，bootstrap等框架；</a></dd>
+                    <dd><em>05</em><a href="javascript:;">使用过jQuery和zepto.js</a></dd>
+                    <dd><em>06</em><a href="javascript:;">熟悉Ajax/json数据处理机制，完成前后端的交互；</a></dd>
+                    <dd><em>07</em><a href="javascript:;">能够完成响应式页面开发和手机端的页面开发；</a></dd>
+                    <dd><em>08</em><a href="javascript:;">有git代码管理经验，使用过npm，bower等工具；</a></dd>
+                    <dd><em>09</em><a href="javascript:;">精通Photoshop 完成这极高切图</a></dd>
+                    <dd><em>10</em><a href="javascript:;">精通足球，篮球，乒乓球各种球类</a></dd>
+                </dl>
+            </div>
+
+            <!--课程体系-->
+            <div class="swiper-slide page2">
+                <h2>IT技能</h2>
+                <div class="imgBox">
+                    <img src="img/zf_course.png" alt="前端"/>
+                    <img src="img/zf_course1.png" alt="JS"/>
+                    <img src="img/zf_course2.png" alt="Angular"/>
+                    <img src="img/zf_course3.png" alt="NODE"/>
+                    <img src="img/zf_course4.png" alt="CSS3"/>
+                    <img src="img/zf_course5.png" alt="APP"/>
+                    <img src="img/zf_course6.png" alt="HTML5"/>
+                </div>
+            </div>
+
+            <div class="swiper-slide page3">
+                <div class="boxBou clear">
+                    <ul class="leftLi">
+                        <li>姓　　名：刘小树</li>
+                        <li>民　　族：汉族</li>
+                        <li>户　　籍：河北-秦皇岛</li>
+                        <li>联系电话：18880808080</li>
+                        <li>邮　　箱：18880808080@163.com</li>
+                    </ul>
+                    <ul class="rightLi">
+                        <li>出生年月：1990.03.10</li>
+                        <li>性　　别：男</li>
+                        <li>婚姻状况：未婚</li>
+                        <li>现居住地：北京</li>
+                        <li>工作经验：两年</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="swiper-slide page4">
+
+                <div class="banner" id="b04">
+
+                    <ul>
+
+                        <li class="li-l">
+                            <div class="logo-l"><img src="img/wjh.jpg"></div>
+                            <div class="text-l">
+                                <h3>xxx科技有限公司</h3>
+                                <h4>2012/09 -- 2015/02</h4>
+                                <p>交互设计师、 视觉设计师协作，根据设计图用HTML和CSS完成页面制作。同时，在此基础之上，对完成的页面进行维护和对网站前端性能做相应的优化 </p>
+                            </div>
+                        </li>
+
+                        <li class="li-r">
+                            <div class="logo-r"><img src="img/yn.jpg">
+
+                                    <div class="text-r">
+                                    <h3>xxx科技有限公司</h3>
+                                    <h4>2015/03 -- 2016/11</h4>
+                                    <p>责任描述：静态页面制作，登录页、首页、列表页、购物车、订单、购物车6个页面，首页、商家页面：动态读取商家数据、购物车数据，订单：动态读取订单数据angular.js框架搭建；</p>
+                                </div>
+
+                            </div>
+
+
+                        </li>
+
+
+                    </ul>
+
+                    <a href="javascript:void(0);" class="unslider-arrow04 prev"><img class="arrow" id="al" src="img/arrowl.png" alt="prev" width="20" height="35"></a>
+
+                    <a href="javascript:void(0);" class="unslider-arrow04 next"><img class="arrow" id="ar" src="img/arrowr.png" alt="next" width="20" height="37"></a>
+
+                </div>
+
+
+            </div>
+            <div class="swiper-slide page5">
+                <h2>项目经验</h2>
+
+                <div class="job">
+                    <h3>xx网站</h3>
+                    <p>一个免费的3D搭建场景网站，为注册用户提供搭建场景，预览，评论等服务</p>
+                    <p>责任描述：摸摸搭网站静态模板更新，搭客人气榜，场景搜索等新功能添加，分页添加</p>
+                    <a href="http://www.3dmomoda.com/"><p>注册-搭建-预览</p></a>
+                </div>
+                <div class="work">
+                    <h3>网上商城移动端项目</h3>
+                    <p>责任描述：静态页面制作，登录页、首页、列表页、购物车、订单、购物车6个页面，首页、商家页面：动态读取商家数据、购物车数据，订单：动态读取订单数据angular.js框架搭建
+                    </p>
+
+                </div>
+            </div>
+            <div class="swiper-slide page6">
+                <div class="page6-top"><img src="img/dhl.png" alt="电话"></div>
+                <div class="page6-me">
+                    <h4>快来联系我吧</h4>
+                    <h4>联系电话：18880808080</h4>
+                    <h4>邮　　箱：18880808080@163.com</h4>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+<!--AUDIO-->
+<section style="display: none;">
+    <!--
+      preload:设置预加载方式
+         none:开始加载页面的时候音频文件不加载任何东西，只有播放的时候才开始加载
+         auto:默认值,开始加载页面的时候就开始下载了
+         metadata:开始加载页面的时候只加载音频的头部信息(音频总时长\专辑...)
+
+     controls:是否用浏览器自带的不放组件,默认都是没有的
+
+     loop:播放完成后循环播放
+
+     autoplay:是否自动播放（真实项目中不用,有很多手机设置它也不能自动播放,可能因为是开始加载资源过多,导致音频文件资源堵塞），我们的自动播放都放在JS中完成
+    -->
+    <audio src="audio/bell.mp3" id="phoneBell" preload="none" loop></audio>
+    <audio src="audio/say.mp3" id="phoneSay" preload="none"></audio>
+    <audio src="audio/music.mp3" id="messageMusic" preload="none" loop></audio>
+</section>
+
+<!--IMPORT JS-->
+<script src="js/zepto.min.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/makisu.min.js"></script>
+<script src="js/index.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/unslider.min.js"></script>
+</body>
+</html>

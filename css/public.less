@@ -1,0 +1,19 @@
+@c-white: #FFF;
+@c-green: #A2E45C;
+@c-bgGreen: #8FBB4C;
+
+.fullPage {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.transitionFn(@property:all,@duration:1s,@timing-function:linear,@delay:0s) {
+  -webkit-transition: @arguments;
+  transition: @arguments;
+}
+
+.animationFn(@name,@duration:1s,@timing-function:ease,@delay:0s,@iteration-count:1,@fill-mode:both) {
+  -webkit-animation: @arguments;
+  animation: @arguments;
+}
