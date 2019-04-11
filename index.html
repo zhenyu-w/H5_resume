@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>H5简历</title>
+    <!-- <link rel="stylesheet/less" type="text/css" href="./css/index.less" /> -->
+    <link rel="stylesheet/less" type="text/css" href="./css/index.less"/>
+</head>
+<body>
+    <!--最外层套一层mainBox：控制当前页面的最大宽度，防止做好的页面在PC满屏端显示，字体和盒子被任意拉伸-->
+    <main class="mainBox">
+        <!--LOADING strat-->
+        <section class="loadingBox">
+            <div class="title">
+                <h1>移动项目</h1>
+                <h2>H5场景交互简历</h2>
+            </div>
+            <div class="prograss">
+                <div class="current"></div>
+            </div>
+        </section>
+        <!--LOADING end-->
+        <!--PHONE start-->
+        <section class="phoneBox">
+            <h2>
+                <img src="./img/zf_teacherTip01.png" alt="">
+                <span class="time">00:00</span>
+            </h2>
+            <div class="answer">
+                <div class="markMove"></div>
+                <a href="javascript:;" class="markLink"></a>
+            </div>
+            <div class="hang">
+                <a href="javascript:;" class="markLink"></a>
+            </div>
+            <!--audio start-->
+            <audio src="./audio/bell.mp3" loop preload="none" id="answerBell"></audio>
+            <audio src="./audio/47.mp3" preload="none" id="introduction"></audio>
+            <!--audio end-->
+        </section>
+        <!--PHONE end-->
+        <!--MESSAGE start-->
+        <section class="messageBox">
+            <ul class="wrapper clearfix">
+                <li class="self">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageStudent.png" alt="" class="pic">
+                    你好！我叫王振宇，曾做过两年php，辞职后自学前端半年
+                </li>
+                <li class="inter">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageLogo.png" alt="" class="pic">
+                    哦，你好，你会哪些技能呢？
+                </li>
+                <li class="self">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageStudent.png" alt="" class="pic">
+                    本人擅长: 原声JS、ES6、Promise等设计模式、组件开发和插件封装,看过JQ源码,可以开发各种Hybrid华纳和APP...
+                </li>
+                <li class="inter">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageLogo.png" alt="" class="pic">
+                    框架会么,哦我们公司现在用的是VUE和REACT
+                </li>
+                <li class="self">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageStudent.png" alt="" class="pic">
+                    之前公司用的是REACT开发,个人对于REACT渲染原理、mcv模式、spa单页面应用、diff差异渲染机制以及redux原理等都有研究,掌握的很熟练,对于vue之前也做过，如果需要可以很快上手。
+                </li>
+                <li class="inter">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageLogo.png" alt="" class="pic">
+                    webpack会么？
+                </li>
+                <li class="self">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageStudent.png" alt="" class="pic">
+                    之前的项目都是基于手脚架完成的,自己偶尔会修改一些webpack配置项
+                </li>
+                <li class="self">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageStudent.png" alt="" class="pic">
+                    不过目前正在深入研究,可以搭建简单的手脚架
+                </li>
+                <li class="self">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageStudent.png" alt="" class="pic">
+                    同时对于NODE/EXPRESS等后台开发也有所涉猎,只是没应用到项目实战中
+                </li>
+                <li class="inter">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageLogo.png" alt="" class="pic">
+                    你认为你的优点在与哪？和其他人相比,公司为啥要录用你？
+                </li>
+                <li class="self">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageStudent.png" alt="" class="pic">
+                    肯吃苦、肯加班、要钱少、能力高...这些够么？
+                </li>
+                <li class="inter">
+                    <i class="arrow"></i>
+                    <img src="./img/zf_messageLogo.png" alt="" class="pic">
+                    就是你了！明天来上班！
+                </li>
+            </ul>
+            <div class="keyBoard">
+                <span></span>
+                <a href="javascript:;" class="submit"></a>
+            </div>
+            
+            <audio src="./audio/music.mp3" preload="none" id="demoMusic"></audio>
+        </section>
+        <!--MESSAGE END-->
+        <!--CUBE start-->
+        <section class="cubeBox">
+            <ul class="cube">
+                <li><img src="./img/zf_cube1.png" alt="专业技能"></li>
+                <li><img src="./img/zf_cube2.png" alt="IT技能"></li>
+                <li><img src="./img/zf_cube3.png" alt="个人资料"></li>
+                <li><img src="./img/zf_cube4.png" alt="工作经验"></li>
+                <li><img src="./img/zf_cube5.png" alt="项目经验"></li>
+                <li><img src="./img/zf_cube6.png" alt="联系方式"></li>
+            </ul>
+            <img src="./img/zf_cubeTip.png" alt="" class="tip">
+        </section>
+        <!--CUBE end-->
+        <!--DETAIL start-->
+        <section class="detailBox">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide page1">
+                            <dl>
+                                <dt>课程大纲</dt>
+                                <dd><em>01</em><a href="javascript:;">Javascript核心课程</a></dd>
+                                <dd><em>02</em><a href="javascript:;">javascript基础实战部分</a></dd>
+                                <dd><em>03</em><a href="javascript:;">javascript核心原理</a></dd>
+                                <dd><em>04</em><a href="javascript:;">jquery源码级课程：从原理到实战</a></dd>
+                                <dd><em>05</em><a href="javascript:;">设计模式和设计规范</a></dd>
+                                <dd><em>06</em><a href="javascript:;">基于Promise模式的ajax</a></dd>
+                                <dd><em>07</em><a href="javascript:;">模块化和组件开发实战、高级单例模式、commonJS、ES6、requireJS、AMD、CMD</a></dd>
+                                <dd><em>08</em><a href="javascript:;">git\github协同开发和项目管理</a></dd>
+                                <dd><em>09</em><a href="javascript:;">后台服务，http协议和ajax</a></dd>
+                                <dd><em>10</em><a href="javascript:;">bta企业级webApp开发和实战</a></dd>
+                                <dd><em>11</em><a href="javascript:;">react/angular/gulp/webpack</a></dd>
+                            </dl>
+                        </div>
+                        <div class="swiper-slide page2">
+                            <h2>课程体系</h2>
+                            <img src="./img/zf_course1.png" alt="">
+                            <img src="./img/zf_course2.png" alt="">
+                            <img src="./img/zf_course3.png" alt="">
+                            <img src="./img/zf_course4.png" alt="">
+                            <img src="./img/zf_course5.png" alt="">
+                            <img src="./img/zf_course6.png" alt="">
+                            <img src="./img/zf_course.png" alt="">
+                        </div>
+                        <div class="swiper-slide page3"></div>
+                        <div class="swiper-slide page4"></div>
+                        <div class="swiper-slide page5"></div>
+                        <div class="swiper-slide page6"></div>
+                    </div>
+                </div>
+        </section>
+        <!--DETAIL end-->
+    </main>
+    <!--浏览器使用的是ajax来拉取.less文件的，所以必须通过服务器环境访问，否则报错-->
+    <script src="./js/prefixfree.min.js"></script>
+    <script src="./js/zepto.min.js"></script>
+    <script src="./js/makisu.min.js"></script>
+    <script src="./js/touch.js"></script>
+    <!--开发环境使用浏览器less,生产环境要使用node编译less,不要继续用浏览器less-->
+    <script src="./js/less.min.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        // 根据当前设备的宽度，动态计算出REM的换算比例，实现元素的等比例缩放
+        ~function anonymous(window) {
+            let computedREM = function computedREM() {
+                let winW = document.documentElement.clientWidth,
+                    desW = 640;
+                    if (winW >= 640) {
+                        document.documentElement.style.fontSize = '100px';
+                        return;
+                    }
+                document.documentElement.style.fontSize = winW / desW * 100 + 'px';
+            }
+            computedREM();
+            window.addEventListener('resize', computedREM);// 窗口大小改变时，执行
+        }(window)
+
+        // 开发过程中，由于当前项目板块中众多(每一个板块都是一个单例),我们最好规划一种机制：通过标识
+        // 的判断可以让程序只执行对应的板块，这样开发哪个板块,我们就把标识该为啥(hash路由控制)
+        let url = window.location.href,
+            well = url.indexOf('#'),
+            hash = well === -1 ? null: url.substring(well + 1);
+        switch (hash) {
+            case 'loading':
+                loadingRender.init();
+                break;
+            case 'phone':
+                phoneRender.init();
+                break;
+            case 'message':
+                messageRender.init();
+                break;
+            case 'cube':
+                cubeRender.init();
+                break;
+            case 'detail':
+                detailRender.init();
+                break;
+            default:
+                loadingRender.init();
+                break;
+        }
+    </script>
+</body>
+</html>
