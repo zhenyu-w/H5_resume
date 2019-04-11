@@ -1,0 +1,586 @@
+/*
+    虽然移动端(安卓&IOS)上的浏览器大部分都是webkit内核的，但是由于很多手机操作系统版本过低(尤其是安卓手机)，
+    导致很多css3新特性不能有有效识别，此时我们使用的大部分css3属性都要写两套才能兼容(加前缀在前，不加前缀在后)
+    例如：-webkit-animation
+          animation
+    太麻烦了，可以使用prefixfree插件，自动补全前缀
+*/
+
+@import "./reset.css";
+@import "./animate.css";
+@import (reference) "./common.less";
+@import "./swiper.less";
+
+html {
+    font-size: 100px;   /* 640px设计稿尺寸中：1REM=100px */
+}
+html, body {
+    position: relative;
+    z-index: -4;
+    height: 100%;
+    overflow: hidden;
+    background: #f4f4f4;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.mainBox {
+    position: relative;
+    z-index: -3;
+    margin: 0 auto;
+    max-width: 640px;
+    height: 100%;
+    background: #fff;
+}
+
+.loadingBox, 
+.phoneBox,
+.messageBox,
+.cubeBox,
+.detailBox {
+    display: none;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.loadingBox {
+    background: #000;
+    .title {
+        height: 1.4rem;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -2.2rem;/*-0.7+-1.5*/
+        color: #fff;
+        h1 {
+            line-height: .75rem;
+            font-size: .5rem;
+            text-align: center;
+        }
+        h2 {
+            line-height: .45rem;
+            font-size: .26rem;
+            text-align: center;
+            margin-top: .2rem;
+            letter-spacing: .04rem;
+        }
+    }
+    .prograss {
+        width: 4.6rem;
+        height: .3rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: .85rem 0 0 -2.3rem;
+        background: #fff;
+        .current {
+            width: 0%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /*此处必须加前缀，因为prefixfree是给属性加前缀，不是给值加前缀*/
+            background: -webkit-linear-gradient(left bottom, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
+            background: linear-gradient(left bottom, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
+            background-size: .3rem .3rem;
+            animation: loadingMove 1s linear 0s infinite both;
+            /*给current设置一个过度动画,当我们在js中控制他的宽度变化时,给其一个平稳的过度效果(而不是生硬的改变)*/
+            transition: .3s;
+        }
+    }
+}
+
+@keyframes loadingMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -.3rem;
+    }
+}
+
+.phoneBox {
+    position: relative;
+    z-index: -2;
+    background: url('../img/zf_phoneBg.jpg') no-repeat;
+    background-size: cover;
+    h2 {
+        margin: .5rem;
+        text-align: center;
+        img {
+            display: inline-block;
+            width: 2.62rem;
+            height: 1.25rem;
+        }
+        span {
+            display: none;
+            margin-top: .1rem;
+            line-height: .3rem;
+            font-size: .3rem;
+            color: #fff;
+            letter-spacing: .05rem;
+        }
+    }
+    .answer {
+        display: block;
+        position: absolute;
+        bottom: .3rem;
+        left: 50%;
+        margin-left: -2.6rem;
+        width: 5.2rem;
+        height: 3.6rem;
+        background: url('../img/zf_phoneListen.png') no-repeat;
+        background-size: 100% 100%;
+        .markMove {
+            position: absolute;
+            right: -.07rem;
+            bottom: .47rem;
+            box-sizing: border-box;
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%;
+            border: .03rem solid #0f0;
+            animation: answerMove .8s linear infinite both;
+            z-index: -1;
+        }
+        .markLink {
+            .markMove;// 继承markMove的属性
+            animation: none;
+            z-index: 1;
+            border: none;
+        }
+        @keyframes answerMove {
+            form {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+    }
+    .hang {
+        display: none;
+        position: absolute;
+        width: 5.2rem;
+        height: 6.59rem;
+        background: url('../img/zf_phoneDetail.png') no-repeat;
+        background-size: 100% 100%;
+        left: 50%;
+        margin-left: -2.6rem;
+        bottom: .3rem;
+        /*
+            初始位置实在phone的底部(看不见，溢出内容隐藏),当点击接听按钮时,
+            控制它从底部出来即可,我们可以基于transform改变样式的,尽量不要
+            使用传统的样式属性,因为transform操作开启了浏览器的硬件加速,性能给更高一些
+        */
+        transform: translateY(6.89rem);
+        transition: .5s;
+        .markLink {
+            position: absolute;
+            width: 1.6rem;
+            height: 1.6rem;
+            left: 50%;
+            margin-left: -.8rem;
+            bottom: .26rem;
+            z-index: 1;
+        }
+    }
+}
+
+.messageBox {
+    background: #EAEAEA;
+    .wrapper {
+        position: absolute;
+        width: 100%;
+        margin-top: .2rem;
+        transition: .3s;
+        li {
+            position: relative;
+            max-width: 3.6rem;
+            padding: .25rem;
+            margin-bottom: .4rem;
+            font-size: .26rem;
+            border-radius: .1rem;
+            line-height: .4rem;
+            opacity: 0;
+            &.active {
+                animation: messageListMove .3s linear both;
+            }
+            .pic {
+                position: absolute;
+                width: 0.82rem;
+                height: 0.82rem;
+                top: 0;
+                border-radius: 50%;
+            }
+            .arrow {
+                position: absolute;
+                width: .1rem;
+                height: .2rem;
+                top: 0.2rem;
+            }
+            &.self {
+                float: left;
+                border: 0.02rem solid #CACACA;
+                background: #FFF;
+                margin-left: 1.25rem;
+                .pic {
+                    left: -1rem;
+                }
+                .arrow {
+                    left: -.1rem;
+                    background: url('../img/zf_messageArrow1.png') no-repeat;
+                    background-size: 100% 100%;
+                }
+            }
+            &.inter {
+                float: right;
+                border: 0.02rem solid #96B474;
+                background: #A2E45C;
+                margin-right: 1.25rem;
+                .pic {
+                    right: -1rem;
+                }
+                .arrow {
+                    right: -.1rem;
+                    background: url('../img/zf_messageArrow2.png') no-repeat;
+                    background-size: 100% 100%;
+                }
+            }
+        }
+    }
+    .keyBoard {
+        position: absolute;
+        width: 100%;
+        height: 5.16rem;
+        box-sizing: border-box;
+        background: url('../img/zf_messageKeyboard.png') no-repeat;
+        background-size: 100% 100%;
+        bottom: -.54rem;
+        transition: .3s;
+        transform: translateY(3.7rem);
+        span {
+            position: absolute;
+            width: 4rem;
+            height: 0.4rem;
+            top: 0.35rem;
+            left: .9rem;
+            font-size: .25rem;
+            line-height: .4rem;
+        }
+        a {
+            display: none;
+            position: absolute;
+            width: 1.47rem;
+            height: 0.74rem;
+            right: .1rem;
+            bottom: .6rem;
+            background: url('../img/zf_messageChat.png') no-repeat;
+            background-size: 100% 100%;
+        }
+    }
+}
+@keyframes messageListMove {
+    form {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cubeBox {
+    background: url('../img/zf_cubeBg.jpg') no-repeat;
+    background-size: cover;
+    /*3D->景深*/
+    perspective: 2000px;
+    .tip {
+        position: absolute;
+        left: 50%;
+        margin-left: -1.97rem;
+        bottom: .5rem;
+        width: 3.9rem;
+        height: 0.44rem;
+    }
+    .cube {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -2.55rem 0 0 -2.55rem;
+        width: 5.1rem;
+        height: 5.1rem;
+        transition: .3s;
+        //3D变形
+        transform-style: preserve-3d;
+        // 为了开始能看到盒子,我们给盒子初始旋转角度
+        transform: scale(.6) rotateX(-35deg) rotateY(35deg);
+
+        li {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+            // 3D移动具体的某一面
+            &:nth-child(1) {
+                transform: translateZ(2.55rem);
+            }
+            &:nth-child(2) {
+                transform: translateZ(-2.55rem) rotateY(180deg);
+            }
+            &:nth-child(3) {
+                transform: translateX(-2.55rem) rotateY(-90deg);
+            }
+            &:nth-child(4) {
+                transform: translateX(2.55rem) rotateY(90deg);
+            }
+            &:nth-child(5) {
+                transform: translateY(-2.55rem) rotateX(90deg);
+            }
+            &:nth-child(6) {
+                transform: translateY(2.55rem) rotateX(-90deg);
+            }
+        }
+    }
+}
+
+.detailBox {
+    .swiper-container {
+        height: 100%;
+        overflow: hidden;
+        .swiper-slide {
+            position: relative;//每个页面相对于自己的页面进行定位
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            &:nth-child(2) {background: #FFF9C1;}
+            &:nth-child(3) {background: #e45454;}
+            &:nth-child(4) {background: #FAC471;}
+            &:nth-child(5) {background: #FBFFE8;}
+            &:nth-child(6) {background: #5975ff;}
+        }
+    }
+    .page1 {
+        dl {
+            position: absolute;
+            width: 5.4rem;
+            height: 7.2rem;
+            top: 50%;
+            left: 50%;
+            margin: -3.6rem 0 0 -2.7rem;
+        }
+        dt,dd {
+            height: .6rem;
+            line-height: .6rem;
+            box-sizing: border-box;
+            background: #8FBB4C;
+        }
+        dt {
+            font-size: .4rem;
+            color: yellow;
+            text-align: center;
+        }
+        dd {
+            position: relative;
+            border-top: .02rem dashed rgba(255, 255, 255, .3);
+            em {
+                position: absolute;
+                width: 0.36rem;
+                height: .42rem;
+                line-height: .42rem;
+                text-align: center;
+                top: 50%;
+                left: .15rem;
+                margin-top: -.21rem;
+                color: #FFF;
+                font-size: .28rem;
+                font-style: normal;
+                background: url('../img/zf_outline.png') no-repeat;
+                background-size: 100% 100%;
+            }
+            a {
+                position: relative;
+                display: block;
+                margin-left: .66rem;
+                color: #000;
+                font-size: .3rem;
+                text-decoration: none;
+                // 移除文字省略号代替
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+            // 防止makisu插件在某些手机端，创建的span挡住dl内容，不显示，(要给a设置层级，首先要定位)
+            a, em {
+                z-index: 1000;
+            }
+        }
+    }
+    .page2 {
+        h2 {
+            height: 0.9rem;
+            margin-top: .8rem;
+            color: #665C50;
+            font-weight: normal;
+            font-size: .6rem;
+            text-align: center;
+            opacity: 0;
+        }
+        img {
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -.5rem 0 0 -.5rem;
+            width: 1rem;
+            height: 1rem;
+            transition: .5s;//从中心到四周私用transition完成
+            &:nth-last-of-type(1) {
+                margin: -.85rem 0 0 -.66rem;
+                width: 1.32rem;
+                height: 1.7rem;
+            }
+        }
+    }
+    #page2 {
+        h2 {
+            animation: bounceInLeft 1s both;
+        }
+        img {
+            &:nth-last-of-type(1) {
+                animation: shake 1s both;
+            }
+            &:not(:nth-last-of-type(1)) {
+                opacity: 1;
+                animation: tada 1s .5s infinite both;
+            }
+            &:nth-of-type(1) {
+                margin-top: -2.9rem;
+            }
+            &:nth-of-type(2) {
+                margin-top: -1.7rem;
+                margin-left: 1.5rem;
+            }
+            &:nth-of-type(3) {
+                margin-top: .7rem;
+                margin-left: 1.5rem;
+            }
+            &:nth-of-type(4) {
+                margin-top: 1.9rem;
+            }
+            &:nth-of-type(5) {
+                margin-top: .7rem;
+                margin-left: -2.5rem;
+            }
+            &:nth-of-type(6) {
+                margin-top: -1.7rem;
+                margin-left: -2.5rem;
+            }
+        }
+    }
+}
+
+
+@keyframes bounceInLeft {
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  
+    0% {
+      opacity: 0;
+      -webkit-transform: translate3d(-3000px, 0, 0);
+      transform: translate3d(-3000px, 0, 0);
+      opacity: 0;
+    }
+  
+    60% {
+      opacity: 1;
+      -webkit-transform: translate3d(25px, 0, 0);
+      transform: translate3d(25px, 0, 0);
+    }
+  
+    75% {
+      -webkit-transform: translate3d(-10px, 0, 0);
+      transform: translate3d(-10px, 0, 0);
+    }
+  
+    90% {
+      -webkit-transform: translate3d(5px, 0, 0);
+      transform: translate3d(5px, 0, 0);
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+}
+@keyframes shake {
+    from,
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      -webkit-transform: translate3d(-10px, 0, 0);
+      transform: translate3d(-10px, 0, 0);
+    }
+  
+    20%,
+    40%,
+    60%,
+    80% {
+      -webkit-transform: translate3d(10px, 0, 0);
+      transform: translate3d(10px, 0, 0);
+    }
+}
+@keyframes tada {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    10%,
+    20% {
+      -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+      transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+    }
+  
+    30%,
+    50%,
+    70%,
+    90% {
+      -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+      transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+  
+    40%,
+    60%,
+    80% {
+      -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+      transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
